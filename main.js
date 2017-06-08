@@ -82,21 +82,51 @@ function createForm() {
     var form = document.querySelector("#form");
 
     for (var i = 0; i < formData.length; i++) {
-        if (formData[i].type === "text" || formData[i] === "tel" || formData[i] === 'email') {
+        if (formData[i].type === "text") {
             var newInput = document.createElement("input");
             newInput.type = formData[i].type;
             newInput.id = formData[i].id;
             newInput.placeholder = formData[i].label;
             form.appendChild(newInput);
         }
-        else if (formData[i] === "select") {
-            var newSelect = document.createElement("select");
-            newSelect.type = formData[i].id;
+        else if (formData[i].type === "email") {
+            var newInput = document.createElement("input");
+            newInput.type = formData[i].type;
+            newInput.id = formData[i].id;
+            newInput.placeholder = formData[i].label;
+            form.appendChild(newInput);
+        }
+        else if (formData[i].type === "tel") {
+            var newInput = document.createElement("input");
+            newInput.type = formData[i].type;
+            newInput.id = formData[i].id;
+            newInput.placeholder = formData[i].label;
+            form.appendChild(newInput);
+        }
+        else if (formData[i].type === "select") {
+            var newInput = document.createElement("select");
+            var newOption = document.createElement("option");
+            newInput.type = formData[i].type;
+            newInput.id = formData[i].id;
+            newOption.textContent = formData[i].options[0].label;
+            newInput.appendChild(newOption);
+            form.appendChild(newInput);
 
-            // else if (formData[i] === textarea)
+            for (var k = 0; k < formData[i].options.length; k++) {
+                var newOption = document.createElement("option");
+                newOption.value = formData[i].options[k].value;
+                newOption.textContent = formData[i].options[k].label;
+                newInput.appendChild(newOption);
+            }
+        }
+        else if (formData[i].type === "textarea") {
+            var newInput = document.createElement("textarea");
+            newInput.type = formData[i].type;
+            newInput.id = formData[i].id;
+            newInput.placeholder = formData[i].label;
+            form.appendChild(newInput);
         }
     }
 }
-console.log(formData[0].type);
-console.log(formData[0].id);
+
 createForm();
